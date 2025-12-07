@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 import os
 from extensions import db
 
+
 load_dotenv()
 
 def create_app():
@@ -14,19 +15,19 @@ def create_app():
 
     db.init_app(app)
 
-    # Import models
+    # Import models AFTER db.init_app
     from models import Department, Employee
 
-    # Register routes
+    # Register blueprints
     from routes import main
     app.register_blueprint(main)
 
     return app
 
-# ---------- VERY IMPORTANT FOR VERCEL ----------
-app = create_app()   # app is the Flask instance
-handler = app        # handler must be the same Flask instance
-# ------------------------------------------------
+# --------------------- REQUIRED BY VERCEL ---------------------
+app = create_app()     # This MUST be Flask()
+handler = app          # This MUST be Flask(), not function
+# --------------------------------------------------------------
 
 if __name__ == "__main__":
     app.run(debug=True)
