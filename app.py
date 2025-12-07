@@ -15,18 +15,14 @@ def create_app():
     db.init_app(app)
 
     from models import Department, Employee
-
-    with app.app_context():
-        db.create_all()
-
     from routes import main
     app.register_blueprint(main)
 
     return app
 
-# 👉 ADD THIS FOR VERCEL
+
 app = create_app()
-handler = app  # optional but recommended for Vercel
+handler = app  # for Vercel
 
 if __name__ == "__main__":
     app.run(debug=True)
