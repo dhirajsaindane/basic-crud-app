@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>Departments</h3>
+<form method="POST" action="{{ url_for('main.add_department') }}" class="d-flex mb-3">
+  <input type="text" name="name" placeholder="New Department" class="form-control me-2" required>
+  <button class="btn btn-success">Add</button>
+</form>
+
+<table class="table table-bordered">
+  <thead class="table-dark">
+    <tr><th>ID</th><th>Name</th></tr>
+  </thead>
+  <tbody>
+    {% for dept in departments %}
+    <tr><td>{{ dept.id }}</td><td>{{ dept.name }}</td></tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
