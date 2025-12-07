@@ -14,15 +14,19 @@ def create_app():
 
     db.init_app(app)
 
+    # Import models
     from models import Department, Employee
+
+    # Register routes
     from routes import main
     app.register_blueprint(main)
 
     return app
 
-
-app = create_app()
-handler = app  # for Vercel
+# ---------- VERY IMPORTANT FOR VERCEL ----------
+app = create_app()   # app is the Flask instance
+handler = app        # handler must be the same Flask instance
+# ------------------------------------------------
 
 if __name__ == "__main__":
     app.run(debug=True)
